@@ -1,0 +1,30 @@
+# Comandos para subir o Scout 360 para o Git
+
+## 1. Inicializar repositório (se ainda não foi feito)
+cd "c:\Users\bruno.rico_farmarcas\Downloads\Projeto TCC"
+git init
+
+## 2. Adicionar arquivos
+git add .
+
+## 3. Fazer commit
+git commit -m "feat: Scout 360 - Sistema completo de análise de jogadores
+
+- Dashboard interativo com cards informativos
+- CRUD completo de jogadores
+- Backend Spring Boot com H2
+- Frontend Angular 17 responsivo
+- APIs REST funcionais
+- Interface moderna e intuitiva"
+
+## 4. Conectar com repositório remoto (substitua pela sua URL)
+git remote add origin https://github.com/SEU_USUARIO/scout-360.git
+
+## 5. Fazer push
+git branch -M main
+git push -u origin main
+
+## Comandos para atualizações futuras:
+git add .
+git commit -m "Descrição das mudanças"
+git push

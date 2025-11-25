@@ -1,0 +1,90 @@
+<div class="jogadores-container">
+  <div class="header">
+    <h1>Jogadores</h1>
+    <button class="btn btn-primary" (click)="novoJogador()">
+      Novo Jogador
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <div class="filter-group">
+      <label for="filtroNome">Nome:</label>
+      <input 
+        type="text" 
+        id="filtroNome"
+        [(ngModel)]="filtroNome" 
+        placeholder="Buscar por nome"
+        class="form-control">
+    </div>
+    
+    <div class="filter-group">
+      <label for="filtroPosicao">Posição:</label>
+      <select id="filtroPosicao" [(ngModel)]="filtroPosicao" (ngModelChange)="onPosicaoChange()" class="form-control">
+        <option value="">Todas as posições</option>
+        <option *ngFor="let posicao of posicoes" [value]="posicao">{{ formatarPosicao(posicao) }}</option>
+      </select>
+    </div>
+    
+    <div class="filter-actions">
+      <button class="btn btn-secondary" (click)="filtrar()">Filtrar</button>
+      <button class="btn btn-outline" (click)="limparFiltros()">Limpar</button>
+    </div>
+  </div>
+
+  <!-- Tabela de Jogadores -->
+  <div class="table-container">
+    <table class="jogadores-table" *ngIf="jogadores.length > 0">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Posição</th>
+          <th>Time</th>
+          <th>Idade</th>
+          <th>Camisa</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jogador of jogadores">
+          <td>
+            <div class="player-info">
+              <strong>{{ jogador.nome }}</strong>
+              <small *ngIf="jogador.apelido">({{ jogador.apelido }})</small>
+            </div>
+          </td>
+          <td>{{ formatarPosicao(jogador.posicao) }}</td>
+          <td>{{ jogador.time || '-' }}</td>
+          <td>{{ calcularIdade(jogador.dataNascimento || '') || '-' }}</td>
+          <td>{{ jogador.numeroCamisa || '-' }}</td>
+          <td>
+            <div class="actions">
+              <button 
+                class="btn btn-sm btn-info" 
+                (click)="verDetalhes(jogador.id!)"
+                title="Ver detalhes">
+                👁️
+              </button>
+              <button 
+                class="btn btn-sm btn-warning" 
+                (click)="editarJogador(jogador.id!)"
+                title="Editar">
+                ✏️
+              </button>
+              <button 
+                class="btn btn-sm btn-danger" 
+                (click)="excluirJogador(jogador.id!, jogador.nome)"
+                title="Excluir">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="no-data" *ngIf="jogadores.length === 0">
+      <p>Nenhum jogador encontrado.</p>
+    </div>
+  </div>
+</div>

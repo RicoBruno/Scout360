@@ -1,0 +1,218 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? 'Editar Sessão' : 'Nova Sessão de Performance' }}</h1>
+  </div>
+
+  <form [formGroup]="sessaoForm" (ngSubmit)="onSubmit()" class="sessao-form">
+    <div class="form-grid">
+      <!-- Jogador -->
+      <div class="form-group">
+        <label for="jogadorId">Jogador *</label>
+        <select 
+          id="jogadorId" 
+          formControlName="jogadorId" 
+          class="form-control"
+          [class.error]="isFieldInvalid('jogadorId')">
+          <option value="">Selecione um jogador</option>
+          <option *ngFor="let jogador of jogadores" [value]="jogador.id">
+            {{ jogador.nome }} ({{ jogador.posicao }})
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('jogadorId')">
+          {{ getFieldError('jogadorId') }}
+        </div>
+      </div>
+
+      <!-- Tipo de Sessão -->
+      <div class="form-group">
+        <label for="tipoSessao">Tipo de Sessão *</label>
+        <select 
+          id="tipoSessao" 
+          formControlName="tipoSessao" 
+          class="form-control"
+          [class.error]="isFieldInvalid('tipoSessao')">
+          <option value="">Selecione o tipo</option>
+          <option *ngFor="let tipo of tiposSessao" [value]="tipo">{{ tipo }}</option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('tipoSessao')">
+          {{ getFieldError('tipoSessao') }}
+        </div>
+      </div>
+
+      <!-- Data -->
+      <div class="form-group">
+        <label for="data">Data e Hora *</label>
+        <input 
+          type="datetime-local" 
+          id="data" 
+          formControlName="data" 
+          class="form-control"
+          [class.error]="isFieldInvalid('data')">
+        <div class="error-message" *ngIf="isFieldInvalid('data')">
+          {{ getFieldError('data') }}
+        </div>
+      </div>
+
+      <!-- Duração -->
+      <div class="form-group">
+        <label for="duracaoMinutos">Duração (minutos) *</label>
+        <input 
+          type="number" 
+          id="duracaoMinutos" 
+          formControlName="duracaoMinutos" 
+          class="form-control"
+          min="1" 
+          max="180"
+          [class.error]="isFieldInvalid('duracaoMinutos')">
+        <div class="error-message" *ngIf="isFieldInvalid('duracaoMinutos')">
+          {{ getFieldError('duracaoMinutos') }}
+        </div>
+      </div>
+
+      <!-- Distância Percorrida -->
+      <div class="form-group">
+        <label for="distanciaPercorridaMetros">Distância Percorrida (metros)</label>
+        <input 
+          type="number" 
+          id="distanciaPercorridaMetros" 
+          formControlName="distanciaPercorridaMetros" 
+          class="form-control"
+          min="0" 
+          max="20000"
+          [class.error]="isFieldInvalid('distanciaPercorridaMetros')">
+        <div class="error-message" *ngIf="isFieldInvalid('distanciaPercorridaMetros')">
+          {{ getFieldError('distanciaPercorridaMetros') }}
+        </div>
+      </div>
+
+      <!-- Velocidade Média -->
+      <div class="form-group">
+        <label for="velocidadeMediaKmH">Velocidade Média (km/h)</label>
+        <input 
+          type="number" 
+          id="velocidadeMediaKmH" 
+          formControlName="velocidadeMediaKmH" 
+          class="form-control"
+          step="0.1"
+          min="0" 
+          max="50"
+          [class.error]="isFieldInvalid('velocidadeMediaKmH')">
+        <div class="error-message" *ngIf="isFieldInvalid('velocidadeMediaKmH')">
+          {{ getFieldError('velocidadeMediaKmH') }}
+        </div>
+      </div>
+
+      <!-- Velocidade Máxima -->
+      <div class="form-group">
+        <label for="velocidadeMaximaKmH">Velocidade Máxima (km/h)</label>
+        <input 
+          type="number" 
+          id="velocidadeMaximaKmH" 
+          formControlName="velocidadeMaximaKmH" 
+          class="form-control"
+          step="0.1"
+          min="0" 
+          max="60"
+          [class.error]="isFieldInvalid('velocidadeMaximaKmH')">
+        <div class="error-message" *ngIf="isFieldInvalid('velocidadeMaximaKmH')">
+          {{ getFieldError('velocidadeMaximaKmH') }}
+        </div>
+      </div>
+
+      <!-- Batimentos Médios -->
+      <div class="form-group">
+        <label for="batimentosMedios">Batimentos Médios (bpm)</label>
+        <input 
+          type="number" 
+          id="batimentosMedios" 
+          formControlName="batimentosMedios" 
+          class="form-control"
+          min="60" 
+          max="220"
+          [class.error]="isFieldInvalid('batimentosMedios')">
+        <div class="error-message" *ngIf="isFieldInvalid('batimentosMedios')">
+          {{ getFieldError('batimentosMedios') }}
+        </div>
+      </div>
+
+      <!-- Batimentos Máximos -->
+      <div class="form-group">
+        <label for="batimentosMaximos">Batimentos Máximos (bpm)</label>
+        <input 
+          type="number" 
+          id="batimentosMaximos" 
+          formControlName="batimentosMaximos" 
+          class="form-control"
+          min="60" 
+          max="220"
+          [class.error]="isFieldInvalid('batimentosMaximos')">
+        <div class="error-message" *ngIf="isFieldInvalid('batimentosMaximos')">
+          {{ getFieldError('batimentosMaximos') }}
+        </div>
+      </div>
+
+      <!-- Número de Sprints -->
+      <div class="form-group">
+        <label for="numeroSprints">Número de Sprints</label>
+        <input 
+          type="number" 
+          id="numeroSprints" 
+          formControlName="numeroSprints" 
+          class="form-control"
+          min="0" 
+          max="100"
+          [class.error]="isFieldInvalid('numeroSprints')">
+        <div class="error-message" *ngIf="isFieldInvalid('numeroSprints')">
+          {{ getFieldError('numeroSprints') }}
+        </div>
+      </div>
+
+      <!-- Observações -->
+      <div class="form-group full-width">
+        <label for="observacoes">Observações</label>
+        <textarea 
+          id="observacoes" 
+          formControlName="observacoes" 
+          class="form-control"
+          rows="3"
+          placeholder="Observações sobre a sessão..."></textarea>
+      </div>
+    </div>
+
+    <!-- Métricas Calculadas -->
+    <div class="metrics-panel">
+      <h3>Métricas Calculadas</h3>
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <label>Distância por Minuto:</label>
+          <span class="metric-value">{{ distanciaPorMinuto | number:'1.1-1' }} m/min</span>
+        </div>
+        <div class="metric-item">
+          <label>Carga de Trabalho:</label>
+          <span class="metric-value">{{ cargaTrabalho | number:'1.0-0' }}</span>
+        </div>
+        <div class="metric-item">
+          <label>Sprints por Minuto:</label>
+          <span class="metric-value">{{ sprintsPorMinuto | number:'1.2-2' }}</span>
+        </div>
+        <div class="metric-item">
+          <label>Intensidade:</label>
+          <span class="metric-value intensity-badge" 
+                [ngClass]="'intensity-' + intensidade.toLowerCase()">
+            {{ intensidade }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="sessaoForm.invalid">
+        {{ isEditMode ? 'Atualizar' : 'Criar' }} Sessão
+      </button>
+    </div>
+  </form>
+</div>

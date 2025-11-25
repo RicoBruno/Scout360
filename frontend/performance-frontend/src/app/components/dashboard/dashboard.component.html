@@ -1,0 +1,65 @@
+<div class="dashboard-container">
+  <h1>Dashboard de Performance</h1>
+  
+  <!-- Cards de Estatísticas -->
+  <div class="stats-grid" *ngIf="stats">
+    <div class="stat-card">
+      <h3>Total de Jogadores</h3>
+      <p class="stat-number">{{ stats.totalJogadores }}</p>
+    </div>
+    
+    <div class="stat-card">
+      <h3>Sessões (7 dias)</h3>
+      <p class="stat-number">{{ stats.totalSessoesUltimos7Dias }}</p>
+    </div>
+    
+    <div class="stat-card">
+      <h3>Média Distância (7 dias)</h3>
+      <p class="stat-number">{{ (stats.mediaDistanciaUltimos7Dias / 1000) | number:'1.1-1' }}km</p>
+    </div>
+    
+    <div class="stat-card">
+      <h3>Média Carga Trabalho (7 dias)</h3>
+      <p class="stat-number">{{ stats.mediaCargaTrabalhoUltimos7Dias | number:'1.0-0' }}</p>
+    </div>
+  </div>
+  
+  <!-- Gráfico -->
+  <div class="chart-container">
+    <canvas id="distanciaChart" width="400" height="200"></canvas>
+  </div>
+  
+  <!-- Últimas Sessões -->
+  <div class="recent-sessions">
+    <h2>Últimas Sessões</h2>
+    <div class="sessions-table" *ngIf="sessoes.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Jogador</th>
+            <th>Tipo</th>
+            <th>Data</th>
+            <th>Distância (m)</th>
+            <th>Duração (min)</th>
+            <th>Intensidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sessao of sessoes">
+            <td>{{ sessao.jogador.nome }}</td>
+            <td>{{ sessao.tipoSessao }}</td>
+            <td>{{ sessao.data | date:'dd/MM/yyyy' }}</td>
+            <td>{{ sessao.distanciaPercorridaMetros || 0 }}</td>
+            <td>{{ sessao.duracaoMinutos || 0 }}</td>
+            <td>
+              <span class="intensity-badge" 
+                    [ngClass]="'intensity-' + (sessao.intensidade || 'baixa').toLowerCase()">
+                {{ sessao.intensidade || 'N/A' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

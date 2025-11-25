@@ -1,0 +1,145 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? 'Editar Jogador' : 'Novo Jogador' }}</h1>
+  </div>
+
+  <form [formGroup]="jogadorForm" (ngSubmit)="onSubmit()" class="jogador-form">
+    <div class="form-grid">
+      <!-- Nome -->
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input 
+          type="text" 
+          id="nome" 
+          formControlName="nome" 
+          class="form-control"
+          [class.error]="isFieldInvalid('nome')">
+        <div class="error-message" *ngIf="isFieldInvalid('nome')">
+          {{ getFieldError('nome') }}
+        </div>
+      </div>
+
+      <!-- Apelido -->
+      <div class="form-group">
+        <label for="apelido">Apelido</label>
+        <input 
+          type="text" 
+          id="apelido" 
+          formControlName="apelido" 
+          class="form-control">
+      </div>
+
+      <!-- Posição -->
+      <div class="form-group">
+        <label for="posicao">Posição *</label>
+        <select 
+          id="posicao" 
+          formControlName="posicao" 
+          class="form-control"
+          [class.error]="isFieldInvalid('posicao')">
+          <option value="">Selecione uma posição</option>
+          <option *ngFor="let posicao of posicoes" [value]="posicao">{{ posicao }}</option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('posicao')">
+          {{ getFieldError('posicao') }}
+        </div>
+      </div>
+
+      <!-- Data de Nascimento -->
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input 
+          type="date" 
+          id="dataNascimento" 
+          formControlName="dataNascimento" 
+          class="form-control">
+      </div>
+
+      <!-- Número da Camisa -->
+      <div class="form-group">
+        <label for="numeroCamisa">Número da Camisa</label>
+        <input 
+          type="number" 
+          id="numeroCamisa" 
+          formControlName="numeroCamisa" 
+          class="form-control"
+          min="1" 
+          max="99"
+          [class.error]="isFieldInvalid('numeroCamisa')">
+        <div class="error-message" *ngIf="isFieldInvalid('numeroCamisa')">
+          {{ getFieldError('numeroCamisa') }}
+        </div>
+      </div>
+
+      <!-- Time -->
+      <div class="form-group">
+        <label for="time">Time</label>
+        <input 
+          type="text" 
+          id="time" 
+          formControlName="time" 
+          class="form-control">
+      </div>
+
+      <!-- Peso -->
+      <div class="form-group">
+        <label for="peso">Peso (kg)</label>
+        <input 
+          type="number" 
+          id="peso" 
+          formControlName="peso" 
+          class="form-control"
+          step="0.1"
+          min="40"
+          max="150"
+          [class.error]="isFieldInvalid('peso')">
+        <div class="error-message" *ngIf="isFieldInvalid('peso')">
+          {{ getFieldError('peso') }}
+        </div>
+      </div>
+
+      <!-- Altura -->
+      <div class="form-group">
+        <label for="altura">Altura (m)</label>
+        <input 
+          type="number" 
+          id="altura" 
+          formControlName="altura" 
+          class="form-control"
+          step="0.01"
+          min="1.5"
+          max="2.2"
+          [class.error]="isFieldInvalid('altura')">
+        <div class="error-message" *ngIf="isFieldInvalid('altura')">
+          {{ getFieldError('altura') }}
+        </div>
+      </div>
+
+      <!-- Frequência Cardíaca Máxima Teórica -->
+      <div class="form-group full-width">
+        <label for="frequenciaCardiacaMaximaTeorica">Frequência Cardíaca Máxima Teórica (bpm)</label>
+        <input 
+          type="number" 
+          id="frequenciaCardiacaMaximaTeorica" 
+          formControlName="frequenciaCardiacaMaximaTeorica" 
+          class="form-control"
+          min="120"
+          max="220"
+          [class.error]="isFieldInvalid('frequenciaCardiacaMaximaTeorica')">
+        <div class="error-message" *ngIf="isFieldInvalid('frequenciaCardiacaMaximaTeorica')">
+          {{ getFieldError('frequenciaCardiacaMaximaTeorica') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="jogadorForm.invalid">
+        {{ isEditMode ? 'Atualizar' : 'Criar' }} Jogador
+      </button>
+    </div>
+  </form>
+</div>
