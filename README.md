@@ -1,36 +1,37 @@
 # Sistema de Controle de Performance de Jogadores de Futebol
 
-Sistema completo para monitoramento e análise da performance de jogadores de futebol, desenvolvido com Angular (frontend) e Spring Boot (backend).
+## Sistema completo para monitoramento e análise da performance de jogadores de futebol, desenvolvido com Angular (frontend) e Spring Boot (backend).
 
-Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-Backend
+## Backend
 - **Spring Boot 3.2.0** - Framework principal
 - **Spring Data JPA** - Persistência de dados
 - **Spring Web** - API REST
 - **H2 Database** - Banco de dados em memória
 - **Maven** - Gerenciamento de dependências
 
-Frontend
+## Frontend
 - **Angular 17** - Framework frontend
 - **TypeScript** - Linguagem de programação
 - **Chart.js** - Biblioteca de gráficos
 - **SCSS** - Pré-processador CSS
 - **Angular Reactive Forms** - Formulários reativos
 
-Funcionalidades
+## Funcionalidades
 
-Dashboard
+## Dashboard
 - Estatísticas gerais (total de jogadores, sessões dos últimos 7 dias)
 - Gráfico de evolução da distância percorrida
 - Lista das últimas sessões com indicadores de intensidade
 
-Gestão de Jogadores
+## Gestão de Jogadores
 - Listagem com filtros por nome e posição
 - Cadastro e edição de jogadores
 - Validação de formulários
 - Exclusão de jogadores
-Controle de Performance
+
+## Controle de Performance
 - Registro de sessões de treino e jogos
 - Cálculos automáticos:
   - Distância por minuto
@@ -38,7 +39,7 @@ Controle de Performance
   - Sprints por minuto
   - Classificação de intensidade
 
-Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 Projeto TCC/
@@ -60,4 +61,4 @@ Projeto TCC/
             └── models/        # Interfaces TypeScript
 ```
 
-## Projeto de fins acadêmicos
+## Projeto acadêmico
