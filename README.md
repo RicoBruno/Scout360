@@ -2,7 +2,7 @@
 
 Sistema completo para monitoramento e análise da performance de jogadores de futebol, desenvolvido com Angular (frontend) e Spring Boot (backend).
 
-## 🚀 Tecnologias Utilizadas
+Tecnologias Utilizadas
 
 ### Backend
 - **Spring Boot 3.2.0** - Framework principal
